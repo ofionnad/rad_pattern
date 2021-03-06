@@ -28,7 +28,7 @@ title2 = dcc.Markdown(
 
 footer = dcc.Markdown(
     '''
-    This was also my first time using [Dash](https://dash.plotly.com/). 
+    This was also my first time using [Dash](https://dash.plotly.com/).
     '''
 )
 #fig = px.line(x=theta, y=np.sin(theta))
@@ -41,7 +41,7 @@ start_val = int((min_val+max_val)/2)
 slider1 =  html.Div([
     html.H3('Wavelength (m):'),
     html.Div(
-        dcc.Slider(    
+        dcc.Slider(
             id='wavelength-slider',
             min = min_val,
             max=max_val,
@@ -50,7 +50,7 @@ slider1 =  html.Div([
             vertical=False,
             updatemode='drag',
             marks={i:'{}'.format(i) for i in range(min_val,max_val)},
-        ), 
+        ),
         style={'height': '5vh', 'width': '50vw'}
     ),
     html.Div(id='slider-output-container1')
@@ -63,7 +63,7 @@ d_start = int((d_min+d_max)/2)
 slider2 =  html.Div([
     html.H3('Dipole Length (m):'),
     html.Div(
-        dcc.Slider(    
+        dcc.Slider(
             id='length-slider',
             min = d_min,
             max=d_max,
@@ -72,7 +72,7 @@ slider2 =  html.Div([
             vertical=False,
             updatemode='drag',
             marks={i:'{}'.format(i) for i in range(d_max)},
-        ), 
+        ),
         style={'height': '5vh', 'width': '50vw'}
     ),
     html.Div(id='slider-output-container2')
@@ -80,6 +80,7 @@ slider2 =  html.Div([
 
 
 app = dash.Dash(__name__, url_base_pathname='/radpattern/', external_stylesheets=external_stylesheets)
+server = app.server
 app.layout = html.Div([title2, slider1, slider2, plot, footer])
 
 def get_wave(k):
@@ -105,9 +106,9 @@ def update_output(drag_xvalue, value):
 
 @app.callback(
     dash.dependencies.Output('my-graph', 'figure'),
-    [dash.dependencies.Input('wavelength-slider', 'drag_value'), 
-    dash.dependencies.Input('wavelength-slider', 'value'), 
-    dash.dependencies.Input('length-slider', 'drag_value'), 
+    [dash.dependencies.Input('wavelength-slider', 'drag_value'),
+    dash.dependencies.Input('wavelength-slider', 'value'),
+    dash.dependencies.Input('length-slider', 'drag_value'),
     dash.dependencies.Input('length-slider', 'value')])
 def update_output(drag_wave, wave, drag_length, length):
 
@@ -123,4 +124,4 @@ def update_output(drag_wave, wave, drag_length, length):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
