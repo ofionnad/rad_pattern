@@ -80,7 +80,7 @@ slider2 =  html.Div([
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-#server = app.server
+server = app.server
 app.layout = html.Div([title2, slider1, slider2, plot, footer])
 
 def get_wave(k):
