@@ -79,8 +79,8 @@ slider2 =  html.Div([
 ])
 
 
-app = dash.Dash(__name__, url_base_pathname='/radpattern/', external_stylesheets=external_stylesheets)
-server = app.server
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+#server = app.server
 app.layout = html.Div([title2, slider1, slider2, plot, footer])
 
 def get_wave(k):
@@ -124,4 +124,4 @@ def update_output(drag_wave, wave, drag_length, length):
     return fig
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
